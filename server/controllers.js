@@ -29,4 +29,4 @@ const getByDestination = async (req, res) => {
     }
 }
 
-export { getAll, getByArea, getByDestination };
+module.exports = { getAll, getByArea, getByDestination };
