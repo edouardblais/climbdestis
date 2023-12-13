@@ -1,0 +1,49 @@
+.maptoggle-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:5px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #004EA4 2%, #D9E4F1 50%, #004EA4 98%);
+    box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
+    padding:7px 2px 0 7px;
+    z-index:2;
+    position:absolute;
+    bottom: 10px;
+    right:10px;
+}
+
+.maptoggle-btn {
+    background: transparent;
+    margin:0;
+    padding:0;
+    border:none;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.maptoggle-img {
+    width:50px;
+    height: auto;
+}
+
+.maptoggle-options-btn {
+    position:absolute;
+    bottom: 10px;
+    right:10px;
+    z-index:2;
+    box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
+    border-radius: 5px;
+    background: linear-gradient(90deg, #D9E4F1 0%, #C0D3E8 0.01%, #004EA4 65.58%);
+    margin:0;
+    padding:8px;
+    border:none;
+    cursor: pointer;
+}
+
+.maptoggle-options-img {
+    width:38px;
+    height: auto;
+}

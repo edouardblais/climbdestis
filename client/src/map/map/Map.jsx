@@ -3,13 +3,9 @@ import { useQuery } from 'react-query'
 // import { useParams } from 'react-router-dom';
 import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer';
 import maplibregl from 'maplibre-gl';
-import Popup from '../popup/Popup';
+import InfoBox from '../infobox/InfoBox';
+import MapToggle from '../maptoggle/MapToggle';
 import './Map.css';
-import map1 from '../../assets/map1.png';
-import map2 from '../../assets/map2.png';
-import map3 from '../../assets/map3.png';
-import map4 from '../../assets/map4.png';
-import mapOptionsIcon from '../../assets/map-options-icon.svg';
 
 function Map() {
     const [zoom, setZoom] = useState(8);
@@ -18,12 +14,17 @@ function Map() {
     const [changingMap, setChangingMap] = useState(false);
     const [displayMapOptions, setDisplayMapOptions] = useState(false);
     const [focusedDestination, setFocusedDestination] = useState(null);
-    const [pins, setPins] = useState([])
+    const [pins, setPins] = useState([]);
+    const [displayModal, setDisplayModal] = useState(false)
     const map = useRef();
     const mapContainer = useRef();
     // const {area} = useParams();
     // const {destination_id} = useParams();
     const mapboxKey = 'pk.eyJ1IjoiZWRvdWFyZGJsYWlzIiwiYSI6ImNscTJsbG8ycTAyYmwya3F3cmI0aGg0ZDMifQ.p9F2drk10GRH3X6d95rmJw';
+    
+    window.showModal = () => {
+        setDisplayModal(true);
+      };
 
     const { isLoading, error, data } = useQuery('allDestis', () =>
         fetch('http://localhost:5000/').then(res =>
@@ -59,15 +60,12 @@ function Map() {
                 if (!pins.includes(desti.id) && desti.latitude && desti.longitude) {
                     const pinIcon = document.createElement('button');
                     pinIcon.classList.add('pin-icon')
-                    const pin = new maplibregl.Marker(null, {
-                        anchor: 'bottom',
-                        offset: [0, 6]
-                    });
+                    const pin = new maplibregl.Marker(null);
                     pin._element = pinIcon;
                     pin.setLngLat([desti.longitude, desti.latitude]);
                     pin.addTo(map.current);
-                    setPins(prevState => [...prevState, desti.id])
-                    pinIcon.addEventListener('click', () => handleFocus(desti))
+                    setPins(prevState => [...prevState, desti.id]);
+                    pinIcon.addEventListener('click', () => handleFocus(desti));
                 }
             })
         }
@@ -80,7 +78,7 @@ function Map() {
         return {url}
     }
 
-    const changeMap = (map) => {
+    const handleMap = (map) => {
         if (mapDisplayed !== map) {
             setChangingMap(true)
             setMapDisplayed(map)
@@ -99,33 +97,15 @@ function Map() {
             })
             setCenter([destination.longitude, destination.latitude])
             setZoom(18)
+            setDisplayModal(true)
         }
     }
 
     return (
         <main className='map-container' ref={mapContainer}>
             <div className='map' ref={map}/>
-            {displayMapOptions?
-            <div className='choose-map-box'>
-                <button type='button' onClick={() => changeMap('mapbox://styles/mapbox/light-v11')} aria-label="Choose light map" className='choose-map-btn'>
-                    <img alt='' src={map2} className='choose-map-img'/>
-                </button>
-                <button type='button' onClick={() => changeMap('mapbox://styles/mapbox/streets-v12')} aria-label="Choose street map" className='choose-map-btn'>
-                    <img alt='' src={map1} className='choose-map-img'/>
-                </button>
-                <button type='button' onClick={() => changeMap('mapbox://styles/mapbox/satellite-streets-v12')} aria-label="Choose satellite map" className='choose-map-btn'>
-                    <img alt='' src={map4} className='choose-map-img'/>
-                </button>
-                <button type='button' onClick={() => changeMap('mapbox://styles/mapbox/dark-v11')} aria-label="Choisir dark map" className='choose-map-btn'>
-                    <img alt='' src={map3} className='choose-map-img'/>
-                </button>
-            </div>
-            :
-            <button className='display-map-options-btn' onClick={() => setDisplayMapOptions(true)} aria-label="display map background options" type='button'>
-                <img alt='' src={mapOptionsIcon} className='display-map-options-img'/>
-            </button>
-            }
-            {focusedDestination && <Popup focusedDestination={focusedDestination} handleFocus={handleFocus}/>}
+            <MapToggle displayMapOptions={displayMapOptions} handleMap={handleMap} handleDisplayOptions={() => setDisplayMapOptions(true)}/>
+            {displayModal && focusedDestination && <InfoBox focusedDestination={focusedDestination} handleClose={() => setDisplayModal(false)}/>}
         </main>
     )
 }
