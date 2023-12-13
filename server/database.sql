@@ -17,5 +17,6 @@ CREATE TABLE destis(
     "8a" VARCHAR(255),
     mountainProject VARCHAR(255),
     restrictions VARCHAR(255),
-    images TEXT
+    images TEXT,
+    orientation VARCHAR(100)
 );

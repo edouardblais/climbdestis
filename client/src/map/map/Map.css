@@ -59,3 +59,15 @@
     width:38px;
     height: auto;
 }
+
+.pin-icon {
+    height: 25px;
+    width: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border:none;
+    padding:0;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url('../../assets/pin-icon.png');
+}

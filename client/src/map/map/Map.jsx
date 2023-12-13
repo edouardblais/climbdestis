@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useQuery } from 'react-query'
 // import { useParams } from 'react-router-dom';
 import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer';
 import maplibregl from 'maplibre-gl';
@@ -12,16 +13,23 @@ import mapOptionsIcon from '../../assets/map-options-icon.svg';
 
 function Map() {
     const [zoom, setZoom] = useState(8);
-    const [center, setCenter] = useState([-72.545088, 46.341778]);
+    const [center, setCenter] = useState([-73.561668, 45.508888]);
     const [mapDisplayed, setMapDisplayed] = useState('mapbox://styles/mapbox/light-v11');
     const [changingMap, setChangingMap] = useState(false);
     const [displayMapOptions, setDisplayMapOptions] = useState(false);
     const [focusedDestination, setFocusedDestination] = useState(null);
+    const [pins, setPins] = useState([])
     const map = useRef();
     const mapContainer = useRef();
     // const {area} = useParams();
     // const {destination_id} = useParams();
     const mapboxKey = 'pk.eyJ1IjoiZWRvdWFyZGJsYWlzIiwiYSI6ImNscTJsbG8ycTAyYmwya3F3cmI0aGg0ZDMifQ.p9F2drk10GRH3X6d95rmJw';
+
+    const { isLoading, error, data } = useQuery('allDestis', () =>
+        fetch('http://localhost:5000/').then(res =>
+            res.json()
+        )
+    )
 
     useEffect(() => {
         if (displayMapOptions) {
@@ -33,20 +41,37 @@ function Map() {
         map.current = new maplibregl.Map({
             container: mapContainer.current,
             style:mapDisplayed,
-            center: center ?? [-72.545088, 46.341778],
+            center: center ?? [-73.561668, 45.508888],
             zoom: zoom ?? 8,
             attributionControl:false,
             trackResize:true,
             transformRequest
-        });  
+        });
     }, [mapDisplayed])
 
-    // ci-bas sera pour handle les pins quand la map change
     useEffect(() => {
-        if (changingMap) {
-            setChangingMap(false)
+        if (data && data.length>0 && !isLoading && !error && map) {
+            if (changingMap) {
+                setPins([])
+                setChangingMap(false)
+            }
+            data.forEach((desti) => {
+                if (!pins.includes(desti.id) && desti.latitude && desti.longitude) {
+                    const pinIcon = document.createElement('button');
+                    pinIcon.classList.add('pin-icon')
+                    const pin = new maplibregl.Marker(null, {
+                        anchor: 'bottom',
+                        offset: [0, 6]
+                    });
+                    pin._element = pinIcon;
+                    pin.setLngLat([desti.longitude, desti.latitude]);
+                    pin.addTo(map.current);
+                    setPins(prevState => [...prevState, desti.id])
+                    pinIcon.addEventListener('click', () => handleFocus(desti))
+                }
+            })
         }
-    }, [changingMap])
+    }, [changingMap, data, map])
 
     const transformRequest = (url, resourceType) => {
         if (isMapboxURL(url)) {
