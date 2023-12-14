@@ -3,28 +3,37 @@ import { useQuery } from 'react-query'
 // import { useParams } from 'react-router-dom';
 import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer';
 import maplibregl from 'maplibre-gl';
-import InfoBox from '../infobox/InfoBox';
+import Sidebar from '../sidebar/Sidebar';
 import MapToggle from '../maptoggle/MapToggle';
 import './Map.css';
 
 function Map() {
+    const [mapboxKey, setMapboxKey] = useState('')
     const [zoom, setZoom] = useState(8);
     const [center, setCenter] = useState([-73.561668, 45.508888]);
     const [mapDisplayed, setMapDisplayed] = useState('mapbox://styles/mapbox/light-v11');
     const [changingMap, setChangingMap] = useState(false);
     const [displayMapOptions, setDisplayMapOptions] = useState(false);
     const [focusedDestination, setFocusedDestination] = useState(null);
+    const [displayDestinationInfo, setDisplayDestinationInfo] = useState(false)
     const [pins, setPins] = useState([]);
-    const [displayModal, setDisplayModal] = useState(false)
+    const [searchResults,] = useState([]);
     const map = useRef();
     const mapContainer = useRef();
     // const {area} = useParams();
     // const {destination_id} = useParams();
-    const mapboxKey = 'pk.eyJ1IjoiZWRvdWFyZGJsYWlzIiwiYSI6ImNscTJsbG8ycTAyYmwya3F3cmI0aGg0ZDMifQ.p9F2drk10GRH3X6d95rmJw';
-    
-    window.showModal = () => {
-        setDisplayModal(true);
-      };
+
+    const mapboxData = useQuery('mapboxkey', () => 
+        fetch('http://localhost:5000/mapboxkey').then(res =>
+            res.json()
+        )
+    ); 
+
+    useEffect(() => {
+        if (mapboxData?.data?.length>0) {
+            setMapboxKey(mapboxData.data[0]?.apikey)
+        }
+    }, [mapboxData])
 
     const { isLoading, error, data } = useQuery('allDestis', () =>
         fetch('http://localhost:5000/').then(res =>
@@ -33,25 +42,27 @@ function Map() {
     )
 
     useEffect(() => {
-        if (displayMapOptions) {
-            setDisplayMapOptions(false)
+        if (mapboxKey) {
+            if (displayMapOptions) {
+                setDisplayMapOptions(false)
+            }
+            if (map.current) {
+                map.current.remove();
+            }
+            map.current = new maplibregl.Map({
+                container: mapContainer.current,
+                style:mapDisplayed,
+                center: center ?? [-73.561668, 45.508888],
+                zoom: zoom ?? 8,
+                attributionControl:false,
+                trackResize:true,
+                transformRequest
+            });
         }
-        if (map.current) {
-            map.current.remove();
-        }
-        map.current = new maplibregl.Map({
-            container: mapContainer.current,
-            style:mapDisplayed,
-            center: center ?? [-73.561668, 45.508888],
-            zoom: zoom ?? 8,
-            attributionControl:false,
-            trackResize:true,
-            transformRequest
-        });
-    }, [mapDisplayed])
+    }, [mapDisplayed, mapboxKey])
 
     useEffect(() => {
-        if (data && data.length>0 && !isLoading && !error && map) {
+        if (data && data.length>0 && !isLoading && !error && map && mapboxKey) {
             if (changingMap) {
                 setPins([])
                 setChangingMap(false)
@@ -69,7 +80,7 @@ function Map() {
                 }
             })
         }
-    }, [changingMap, data, map])
+    }, [changingMap, data, map, mapboxKey])
 
     const transformRequest = (url, resourceType) => {
         if (isMapboxURL(url)) {
@@ -88,7 +99,6 @@ function Map() {
     }
 
     const handleFocus = (destination) => {
-        setFocusedDestination(destination)
         if (destination?.longitude && destination?.latitude) {
             map.current.flyTo({
                 center:[destination.longitude, destination.latitude],
@@ -97,7 +107,16 @@ function Map() {
             })
             setCenter([destination.longitude, destination.latitude])
             setZoom(18)
-            setDisplayModal(true)
+        }
+        setDisplayDestinationInfo(true)
+        setFocusedDestination(destination)
+    }
+
+    const handleDisplayDestinationInfo = (boolean) => {
+        if (boolean) {
+            setDisplayDestinationInfo(true)
+        } else if (!boolean) {
+            setDisplayDestinationInfo(false)
         }
     }
 
@@ -105,7 +124,7 @@ function Map() {
         <main className='map-container' ref={mapContainer}>
             <div className='map' ref={map}/>
             <MapToggle displayMapOptions={displayMapOptions} handleMap={handleMap} handleDisplayOptions={() => setDisplayMapOptions(true)}/>
-            {displayModal && focusedDestination && <InfoBox focusedDestination={focusedDestination} handleClose={() => setDisplayModal(false)}/>}
+            <Sidebar results={searchResults.length>0?searchResults:data} focusedDestination={focusedDestination} displayDestinationInfo={displayDestinationInfo} handleDisplayDestinationInfo={handleDisplayDestinationInfo}/>
         </main>
     )
 }

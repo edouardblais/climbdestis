@@ -20,3 +20,9 @@ CREATE TABLE destis(
     images TEXT,
     orientation VARCHAR(100)
 );
+
+CREATE TABLE apikeys(
+    id SERIAL PRIMARY KEY,
+    api VARCHAR(100),
+    apikey VARCHAR(255)
+)

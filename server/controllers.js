@@ -1,5 +1,14 @@
 const pool = require("./db")
 
+const getMapboxKey = async (req, res) => {
+    try {
+        const mapboxKey = await pool.query("SELECT * FROM apikeys WHERE api = 'mapbox'");
+        res.json(mapboxKey.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 const getAll = async (req, res) => {
     try {
         const allDestinations = await pool.query("SELECT * from destis");
@@ -29,4 +38,4 @@ const getByDestination = async (req, res) => {
     }
 }
 
-module.exports = { getAll, getByArea, getByDestination };
+module.exports = { getMapboxKey, getAll, getByArea, getByDestination };

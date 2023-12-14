@@ -3,7 +3,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
-import Map from './map/map/Map'
+import Map from './components/map/Map'
 import './App.css';
 
 const queryClient = new QueryClient()

@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { getAll, getByArea, getByDestination } = require("./controllers")
+const { getMapboxKey, getAll, getByArea, getByDestination } = require("./controllers")
 
 app.use(cors());
 app.use(express.json());
+
+app.get("/mapboxkey", getMapboxKey)
 
 app.get("/", getAll)
 
