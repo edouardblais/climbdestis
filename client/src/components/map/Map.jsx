@@ -18,6 +18,7 @@ function Map() {
     const [displayDestinationInfo, setDisplayDestinationInfo] = useState(false)
     const [pins, setPins] = useState([]);
     const [searchResults,] = useState([]);
+    const [showSidebar, setShowSidebar] = useState(false)
     const map = useRef();
     const mapContainer = useRef();
     // const {area} = useParams();
@@ -106,10 +107,11 @@ function Map() {
                 zoom:18
             })
             setCenter([destination.longitude, destination.latitude])
-            setZoom(18)
+            setZoom(12)
         }
         setDisplayDestinationInfo(true)
         setFocusedDestination(destination)
+        setShowSidebar(true)
     }
 
     const handleDisplayDestinationInfo = (boolean) => {
@@ -120,11 +122,19 @@ function Map() {
         }
     }
 
+    const handleShowSidebar = () => {
+        if (showSidebar) {
+            setShowSidebar(false)
+        } else if (!showSidebar) {
+            setShowSidebar(true)
+        }
+    }
+
     return (
         <main className='map-container' ref={mapContainer}>
             <div className='map' ref={map}/>
             <MapToggle displayMapOptions={displayMapOptions} handleMap={handleMap} handleDisplayOptions={() => setDisplayMapOptions(true)}/>
-            <Sidebar results={searchResults.length>0?searchResults:data} focusedDestination={focusedDestination} displayDestinationInfo={displayDestinationInfo} handleDisplayDestinationInfo={handleDisplayDestinationInfo}/>
+            <Sidebar showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} results={searchResults.length>0?searchResults:data} focusedDestination={focusedDestination} displayDestinationInfo={displayDestinationInfo} handleDisplayDestinationInfo={handleDisplayDestinationInfo}/>
         </main>
     )
 }

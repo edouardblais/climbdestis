@@ -1,0 +1,96 @@
+.sidebar-main-box {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:5;
+    display: flex;
+    flex-direction: column;
+    padding:10px 0 10px 5px;
+    height: 100%;
+    background-color: #fff;
+    gap:10px;
+    box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
+}
+
+.sidebar-logo {
+    height: 20px;
+    width: auto;
+}
+
+.sidebar-homecrag {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.sidebar-content-box {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.sidebar-toggle-btn {
+    margin:0;
+    outline: none;
+    padding:0;
+    border:none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+}
+
+.sidebar-toggle-btn-img {
+    height: 20px;
+    width: auto;
+}
+
+.sidebar-column-box {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.sidebar-big-column-box {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.sidebar-row-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:5px;
+}
+
+.sidebar-big-row-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
+    padding-left: 5px;
+}
+
+.sidebar-destination-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.sidebar-destination-area {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.sidebar-destination-link-img {
+    height: 25px;
+    width: auto;
+}
+
+.sidebar-destination-category {
+    font-size: 1.2rem;
+    font-weight: 500;
+}

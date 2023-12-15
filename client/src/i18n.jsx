@@ -14,12 +14,12 @@ i18n
     resources: {
       fr: {
         translation: {
-          close:'Fermer'
+          routesinfo:'Info sur les voies'
           }
         },
       en: {
         translation: {
-          close: 'Close'
+          routesinfo:'Routes info'
         }
       }
     }
