@@ -1,0 +1,26 @@
+.translate-btn-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 7px;
+}
+
+.translate-btn {
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.50));
+    background: linear-gradient(90deg, #D9E4F1 -80%, #C0D3E8 -58.49%, #004EA4 80%);
+    border-radius: 5px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #FFFFFF;
+    padding: 8px 8px;
+    border:none;
+    width:30px;
+    height: auto;
+}
+
+.translate-btn:hover {
+    cursor: pointer;
+    background: #000000;
+}

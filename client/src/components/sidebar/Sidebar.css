@@ -5,27 +5,29 @@
     z-index:5;
     display: flex;
     flex-direction: column;
-    padding:10px 0 10px 5px;
+    padding:15px 5px 15px 0px;
     height: 100%;
     background-color: #fff;
-    gap:10px;
+    gap:15px;
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
 }
 
 .sidebar-logo {
-    height: 20px;
-    width: auto;
+    height: auto;
+    width: 38px;
 }
 
 .sidebar-homecrag {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
+    padding-left: 5px;
 }
 
 .sidebar-content-box {
     display: flex;
     flex-direction: column;
     gap:10px;
+    padding-top: 10px;
 }
 
 .sidebar-toggle-btn {
@@ -38,20 +40,24 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: fit-content;
     height: fit-content;
     background-color: transparent;
 }
 
 .sidebar-toggle-btn-img {
-    height: 20px;
+    height: 30px;
+    width: auto;
+}
+
+.sidebar-toggle-btn-img-small {
+    height: 25px;
     width: auto;
 }
 
 .sidebar-column-box {
     display: flex;
     flex-direction: column;
-    gap:5px;
+    gap:2px;
 }
 
 .sidebar-big-column-box {
@@ -63,26 +69,32 @@
 .sidebar-row-box {
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap:5px;
+    align-items: center;
 }
 
 .sidebar-big-row-box {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap:10px;
+    gap:12px;
     padding-left: 5px;
+    padding-top: 3px;
 }
 
 .sidebar-destination-name {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
 }
 
 .sidebar-destination-area {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 400;
+}
+
+.sidebar-destination-text {
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .sidebar-destination-link-img {
@@ -91,6 +103,15 @@
 }
 
 .sidebar-destination-category {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color:#004EA4;
+}
+
+.padding-left-10px {
+    padding-left: 10px;
+}
+
+.border-bottom {
+    border-bottom: 2px solid #c5c5c5;
 }

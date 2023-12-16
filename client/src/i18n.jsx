@@ -7,19 +7,31 @@ i18n
   .use(initReactI18next)
   .init({
     debug: false,
-    fallbackLng: 'fr',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false, 
     },
     resources: {
       fr: {
         translation: {
-          routesinfo:'Info sur les voies'
+          routesinfo:"Topos des voies",
+          orientation:'Ensoleillement',
+          weather:'Météo',
+          allDaySun:'Soleil toute la journée',
+          allDayShade:"À l'ombre toute la journée",
+          amSun:"Soleil en matinée",
+          pmSun:"Soleil en après-midi"
           }
         },
       en: {
         translation: {
-          routesinfo:'Routes info'
+          routesinfo:'Routes info',
+          orientation:'Sun orientation',
+          weather: 'Weather',
+          allDaySun:'All day sun',
+          allDayShade:"All day shade",
+          amSun:"AM sun",
+          pmSun:"PM sun"
         }
       }
     }
