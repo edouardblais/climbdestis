@@ -1,0 +1,25 @@
+.sidebar-destination-name {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.sidebar-destination-area {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.sidebar-destination-text {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.sidebar-destination-link-img {
+    height: 25px;
+    width: auto;
+}
+
+.sidebar-destination-category {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color:#004EA4;
+}

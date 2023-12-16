@@ -43,6 +43,10 @@
     cursor: pointer;
 }
 
+.maptoggle-options-btn:hover {
+    background: black;
+}
+
 .maptoggle-options-img {
     width:38px;
     height: auto;

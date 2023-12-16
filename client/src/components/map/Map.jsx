@@ -25,9 +25,8 @@ function Map() {
     // const {destination_id} = useParams();
 
     const mapboxData = useQuery('mapboxkey', () => 
-        fetch('http://localhost:5000/mapboxkey').then(res =>
-            res.json()
-        )
+        fetch('http://localhost:5000/mapboxkey')
+            .then(res => res.json())
     ); 
 
     useEffect(() => {
@@ -90,10 +89,11 @@ function Map() {
         return {url}
     }
 
-    const handleMap = (map) => {
-        if (mapDisplayed !== map) {
+    const handleMap = (newMap) => {
+        if (mapDisplayed !== newMap) {
+            setZoom(map.current.getZoom())
             setChangingMap(true)
-            setMapDisplayed(map)
+            setMapDisplayed(newMap)
         } else {
             setDisplayMapOptions(false)
         }
@@ -104,7 +104,7 @@ function Map() {
             map.current.flyTo({
                 center:[destination.longitude, destination.latitude],
                 essential:true,
-                zoom:18
+                zoom:12
             })
             setCenter([destination.longitude, destination.latitude])
             setZoom(12)

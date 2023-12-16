@@ -20,7 +20,8 @@ i18n
           allDaySun:'Soleil toute la journée',
           allDayShade:"À l'ombre toute la journée",
           amSun:"Soleil en matinée",
-          pmSun:"Soleil en après-midi"
+          pmSun:"Soleil en après-midi",
+          restrictions:'Accès et restrictions'
           }
         },
       en: {
@@ -31,7 +32,8 @@ i18n
           allDaySun:'All day sun',
           allDayShade:"All day shade",
           amSun:"AM sun",
-          pmSun:"PM sun"
+          pmSun:"PM sun",
+          restrictions:'Access and restrictions'
         }
       }
     }
