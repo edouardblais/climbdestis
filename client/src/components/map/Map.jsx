@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { useQuery } from 'react-query'
-// import { useParams } from 'react-router-dom';
 import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer';
 import maplibregl from 'maplibre-gl';
 import Sidebar from '../sidebar/Sidebar';
 import MapToggle from '../maptoggle/MapToggle';
 import './Map.css';
+import SearchBar from '../searchbar/SearchBar';
 
 function Map() {
     const [mapboxKey, setMapboxKey] = useState('')
@@ -17,16 +17,13 @@ function Map() {
     const [focusedDestination, setFocusedDestination] = useState(null);
     const [displayDestinationInfo, setDisplayDestinationInfo] = useState(false)
     const [pins, setPins] = useState([]);
-    const [searchResults,] = useState([]);
     const [showSidebar, setShowSidebar] = useState(false)
+    const [areas, setAreas] = useState([])
     const map = useRef();
     const mapContainer = useRef();
-    // const {area} = useParams();
-    // const {destination_id} = useParams();
 
     const mapboxData = useQuery('mapboxkey', () => 
-        fetch('http://localhost:5000/mapboxkey')
-            .then(res => res.json())
+        fetch('http://localhost:5000/mapboxkey').then(res => res.json())
     ); 
 
     useEffect(() => {
@@ -36,7 +33,8 @@ function Map() {
     }, [mapboxData])
 
     const { isLoading, error, data } = useQuery('allDestis', () =>
-        fetch('http://localhost:5000/').then(res =>
+        fetch('http://localhost:5000/')
+        .then(res =>
             res.json()
         )
     )
@@ -60,6 +58,18 @@ function Map() {
             });
         }
     }, [mapDisplayed, mapboxKey])
+
+    useEffect(() => {
+        if (data && data.length>0) {
+            const areasList = []
+            data.forEach((desti) => {
+                if (!areasList.includes(desti.area)) {
+                    areasList.push(desti.area)
+                }
+            })
+            setAreas(areasList)
+        }
+    }, [data])
 
     useEffect(() => {
         if (data && data.length>0 && !isLoading && !error && map && mapboxKey) {
@@ -133,8 +143,25 @@ function Map() {
     return (
         <main className='map-container' ref={mapContainer}>
             <div className='map' ref={map}/>
-            <MapToggle displayMapOptions={displayMapOptions} handleMap={handleMap} handleDisplayOptions={() => setDisplayMapOptions(true)}/>
-            <Sidebar showSidebar={showSidebar} handleShowSidebar={handleShowSidebar} results={searchResults.length>0?searchResults:data} focusedDestination={focusedDestination} displayDestinationInfo={displayDestinationInfo} handleDisplayDestinationInfo={handleDisplayDestinationInfo}/>
+            <SearchBar
+                data={data}
+                handleFocus={handleFocus}
+            />
+            <MapToggle 
+                displayMapOptions={displayMapOptions} 
+                handleMap={handleMap} 
+                handleDisplayOptions={() => setDisplayMapOptions(true)}
+            />
+            <Sidebar 
+                showSidebar={showSidebar} 
+                handleShowSidebar={handleShowSidebar} 
+                data={data} 
+                areas={areas}
+                focusedDestination={focusedDestination} 
+                displayDestinationInfo={displayDestinationInfo} 
+                handleDisplayDestinationInfo={handleDisplayDestinationInfo}
+                handleFocus={handleFocus}
+            />
         </main>
     )
 }

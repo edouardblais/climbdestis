@@ -2,12 +2,12 @@
 import './Sidebar.css';
 import ToggleLanguage from "./togglelanguage/ToggleLanguage";
 import Destination from "./destination/Destination";
-import Results from './results/Results';
+import Data from './data/Data';
 import menuIcon from '../../assets/menu-icon.svg';
 import menuCloseIcon from '../../assets/menu-close-icon.svg';
 import logoIcon from '../../assets/logo-icon.png';
 
-function Sidebar({showSidebar, handleShowSidebar, results, focusedDestination, displayDestinationInfo, handleDisplayDestinationInfo}) {
+function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestination, displayDestinationInfo, handleDisplayDestinationInfo, handleFocus}) {
     return (
         <aside className="sidebar-main-box" style={{width:showSidebar?'300px':'50px', paddingLeft:showSidebar?'7px':'0px'}}>
             <div className="sidebar-row-box" style={{paddingLeft:showSidebar?'0px':'7px'}}>
@@ -24,7 +24,7 @@ function Sidebar({showSidebar, handleShowSidebar, results, focusedDestination, d
                 <img src={menuIcon} className='sidebar-toggle-btn-img' alt='toggle menu'/>
             </button>}
             {showSidebar && displayDestinationInfo && focusedDestination && <Destination focusedDestination={focusedDestination} handleDisplayDestinationInfo={handleDisplayDestinationInfo}/>}
-            {showSidebar && !displayDestinationInfo && <Results results={results}/>}
+            {showSidebar && !displayDestinationInfo && <Data data={data} areas={areas} handleFocus={handleFocus}/>}
             <div style={{flex:1}}/>
             <ToggleLanguage showSidebar={showSidebar}/>
         </aside>
