@@ -4,8 +4,9 @@ import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-trans
 import maplibregl from 'maplibre-gl';
 import Sidebar from '../sidebar/Sidebar';
 import MapToggle from '../maptoggle/MapToggle';
-import './Map.css';
 import SearchBar from '../searchbar/SearchBar';
+import Geolocator from '../geolocator/Geolocator';
+import './Map.css';
 
 function Map() {
     const [mapboxKey, setMapboxKey] = useState('')
@@ -102,6 +103,7 @@ function Map() {
     const handleMap = (newMap) => {
         if (mapDisplayed !== newMap) {
             setZoom(map.current.getZoom())
+            setCenter([map.current.getCenter().lng, map.current.getCenter().lat])
             setChangingMap(true)
             setMapDisplayed(newMap)
         } else {
@@ -116,8 +118,6 @@ function Map() {
                 essential:true,
                 zoom:12
             })
-            setCenter([destination.longitude, destination.latitude])
-            setZoom(12)
         }
         setDisplayDestinationInfo(true)
         setFocusedDestination(destination)
@@ -161,6 +161,9 @@ function Map() {
                 displayDestinationInfo={displayDestinationInfo} 
                 handleDisplayDestinationInfo={handleDisplayDestinationInfo}
                 handleFocus={handleFocus}
+            />
+            <Geolocator 
+                map={map}
             />
         </main>
     )

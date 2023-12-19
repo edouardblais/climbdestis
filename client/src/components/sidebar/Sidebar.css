@@ -10,6 +10,23 @@
     background-color: #fff;
     gap:15px;
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
+    transition: width 0.4s ease;
+}
+
+.transform-opacity {
+    transition: opacity 0.5s ease 0.1s;
+}
+
+.transform-opacity-fast {
+    transition: opacity 0.1s ease;
+}
+
+.transform-opacity-delayed {
+    transition: opacity 0.3s ease 0.2s;
+}
+
+.transform-opacity-cancelled {
+    transition: opacity 0s ease;
 }
 
 .sidebar-logo {

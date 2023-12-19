@@ -12,12 +12,11 @@ function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestinatio
         <aside className="sidebar-main-box" style={{width:showSidebar?'300px':'50px', paddingLeft:showSidebar?'7px':'0px'}}>
             <div className="sidebar-row-box" style={{paddingLeft:showSidebar?'0px':'7px'}}>
                 <img alt='logo' className='sidebar-logo' src={logoIcon}/>
-                {showSidebar && <h1 className="sidebar-homecrag">HomeCrag</h1>}
+                <h1 className={showSidebar?"sidebar-homecrag transform-opacity":"sidebar-homecrag transform-opacity-fast"} style={{opacity:showSidebar?1:0}}>HomeCrag</h1>
                 {showSidebar && <div style={{flex:1}}/>}
-                {showSidebar && 
-                <button type='button' className='sidebar-toggle-btn' onClick={handleShowSidebar}>
+                <button type='button' className={showSidebar?'sidebar-toggle-btn transform-opacity-delayed':'sidebar-toggle-btn transform-opacity-cancelled'} style={{opacity:showSidebar?1:0}} onClick={handleShowSidebar}>
                     <img src={menuCloseIcon} className='sidebar-toggle-btn-img' alt='toggle menu'/>
-                </button>}
+                </button>
             </div>
             {!showSidebar && 
             <button type='button' className='sidebar-toggle-btn' onClick={handleShowSidebar} style={{width:showSidebar?'fit-content':'100%'}}>
