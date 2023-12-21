@@ -14,7 +14,7 @@ function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestinatio
                 <img alt='logo' className='sidebar-logo' src={logoIcon}/>
                 <h1 className={showSidebar?"sidebar-homecrag transform-opacity":"sidebar-homecrag transform-opacity-fast"} style={{opacity:showSidebar?1:0}}>HomeCrag</h1>
                 {showSidebar && <div style={{flex:1}}/>}
-                <button type='button' className={showSidebar?'sidebar-toggle-btn transform-opacity-delayed':'sidebar-toggle-btn transform-opacity-cancelled'} style={{opacity:showSidebar?1:0}} onClick={handleShowSidebar}>
+                <button type='button' className={showSidebar?'sidebar-toggle-btn transform-opacity-delayed':'sidebar-toggle-btn transform-opacity-cancelled'} style={{opacity:showSidebar?1:0, paddingRight:showSidebar?'5px':'0px'}} onClick={handleShowSidebar}>
                     <img src={menuCloseIcon} className='sidebar-toggle-btn-img' alt='toggle menu'/>
                 </button>
             </div>

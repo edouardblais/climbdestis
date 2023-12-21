@@ -14,7 +14,7 @@ function ToggleLanguage({showSidebar}) {
     }
 
     return (
-        <div style={{justifyContent:showSidebar?'flex-end':'center', paddingRight:showSidebar?'5px':'0px'}} className="translate-btn-box">
+        <div style={{justifyContent:showSidebar?'flex-end':'center'}} className="translate-btn-box">
             <button type='button' className="translate-btn" onClick={changeLanguage}>{i18n.language==='fr'?'En':'Fr'}</button>
         </div>
     )

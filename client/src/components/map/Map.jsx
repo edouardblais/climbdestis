@@ -6,6 +6,7 @@ import Sidebar from '../sidebar/Sidebar';
 import MapToggle from '../maptoggle/MapToggle';
 import SearchBar from '../searchbar/SearchBar';
 import Geolocator from '../geolocator/Geolocator';
+import LoadingSpinner from '../loadingspinner/LoadingSpinner';
 import './Map.css';
 
 function Map() {
@@ -19,7 +20,8 @@ function Map() {
     const [displayDestinationInfo, setDisplayDestinationInfo] = useState(false)
     const [pins, setPins] = useState([]);
     const [showSidebar, setShowSidebar] = useState(false)
-    const [areas, setAreas] = useState([])
+    const [areas, setAreas] = useState([]);
+    const [mapLoading, setMapLoading] = useState(true)
     const map = useRef();
     const mapContainer = useRef();
 
@@ -48,6 +50,7 @@ function Map() {
             if (map.current) {
                 map.current.remove();
             }
+            setMapLoading(true)
             map.current = new maplibregl.Map({
                 container: mapContainer.current,
                 style:mapDisplayed,
@@ -57,6 +60,7 @@ function Map() {
                 trackResize:true,
                 transformRequest
             });
+            map.current.on('load', () => setMapLoading(false))
         }
     }, [mapDisplayed, mapboxKey])
 
@@ -143,11 +147,13 @@ function Map() {
     return (
         <main className='map-container' ref={mapContainer}>
             <div className='map' ref={map}/>
+            {(isLoading || mapLoading) && <LoadingSpinner/>}
             <SearchBar
                 data={data}
                 handleFocus={handleFocus}
             />
             <MapToggle 
+                showSidebar={showSidebar}
                 displayMapOptions={displayMapOptions} 
                 handleMap={handleMap} 
                 handleDisplayOptions={() => setDisplayMapOptions(true)}
@@ -163,6 +169,7 @@ function Map() {
                 handleFocus={handleFocus}
             />
             <Geolocator 
+                showSidebar={showSidebar}
                 map={map}
             />
         </main>

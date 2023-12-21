@@ -6,11 +6,11 @@ import map3 from '../../assets/map3.png';
 import map4 from '../../assets/map4.png';
 import mapOptionsIcon from '../../assets/map-options-icon.svg';
 
-function MapToggle({displayMapOptions, handleMap, handleDisplayOptions}) {
+function MapToggle({showSidebar, displayMapOptions, handleMap, handleDisplayOptions}) {
     return (
         <>
             {displayMapOptions?
-                <div className='maptoggle-box'>
+                <div className='maptoggle-box' style={{left:showSidebar?'320px':'70px'}}>
                     <button type='button' onClick={() => handleMap('mapbox://styles/mapbox/light-v11')} aria-label="Choose light map" className='maptoggle-btn'>
                         <img alt='' src={map2} className='maptoggle-img'/>
                     </button>
@@ -25,7 +25,7 @@ function MapToggle({displayMapOptions, handleMap, handleDisplayOptions}) {
                     </button>
                 </div>
                 :
-                <button className='maptoggle-options-btn' onClick={handleDisplayOptions} aria-label="display map background options" type='button'>
+                <button className='maptoggle-options-btn' onClick={handleDisplayOptions} aria-label="display map background options" type='button' style={{left:showSidebar?'320px':'70px'}}>
                     <img alt='' src={mapOptionsIcon} className='maptoggle-options-img'/>
                 </button>
             }
