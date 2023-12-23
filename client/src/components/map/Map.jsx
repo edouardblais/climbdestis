@@ -21,26 +21,33 @@ function Map() {
     const [pins, setPins] = useState([]);
     const [showSidebar, setShowSidebar] = useState(false)
     const [areas, setAreas] = useState([]);
-    const [mapLoading, setMapLoading] = useState(true)
+    const [mapLoading, setMapLoading] = useState(true);
+    const [user, setUser] = useState(null);
     const map = useRef();
     const mapContainer = useRef();
 
     const mapboxData = useQuery('mapboxkey', () => 
-        fetch('http://localhost:5000/mapboxkey').then(res => res.json())
+        fetch('http://localhost:5000/apiKeys/getMapboxKey').then(res => res.json())
     ); 
+
+    const { isLoading, error, data } = useQuery('allDestis', () =>
+        fetch('http://localhost:5000/data/getAll').then(res =>res.json())
+    );
+
+    useEffect(() => {
+        const userData = localStorage.getItem('user');
+        if (userData) {
+            const parsedUserData = JSON.parse(userData);
+            setUser(parsedUserData)
+            console.log(parsedUserData)
+        }
+    }, [])
 
     useEffect(() => {
         if (mapboxData?.data?.length>0) {
             setMapboxKey(mapboxData.data[0]?.apikey)
         }
     }, [mapboxData])
-
-    const { isLoading, error, data } = useQuery('allDestis', () =>
-        fetch('http://localhost:5000/')
-        .then(res =>
-            res.json()
-        )
-    )
 
     useEffect(() => {
         if (mapboxKey) {
@@ -144,6 +151,11 @@ function Map() {
         }
     }
 
+    const logout = () => {
+        localStorage.clear();
+        setUser(null)
+    }
+
     return (
         <main className='map-container' ref={mapContainer}>
             <div className='map' ref={map}/>
@@ -167,6 +179,8 @@ function Map() {
                 displayDestinationInfo={displayDestinationInfo} 
                 handleDisplayDestinationInfo={handleDisplayDestinationInfo}
                 handleFocus={handleFocus}
+                user={user}
+                logout={logout}
             />
             <Geolocator 
                 showSidebar={showSidebar}

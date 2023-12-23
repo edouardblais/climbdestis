@@ -7,8 +7,7 @@ const jwtGenerator = require("../utils/jwtGenerator");
 const authorize = require("../middleware/authorize");
 
 router.post("/register", validate, async (req, res) => {
-  const { email, name, password } = req.body;
-
+  const { email, username, password } = req.body;
   try {
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
       email
@@ -23,11 +22,9 @@ router.post("/register", validate, async (req, res) => {
 
     let newUser = await pool.query(
       "INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *",
-      [name, email, bcryptPassword]
+      [username, email, bcryptPassword]
     );
-
     const jwtToken = jwtGenerator(newUser.rows[0].user_id);
-
     return res.json({ jwtToken });
   } catch (err) {
     console.error(err.message);
@@ -56,7 +53,7 @@ router.post("/login", validate, async (req, res) => {
       return res.status(401).json("Invalid Credential");
     }
     const jwtToken = jwtGenerator(user.rows[0].user_id);
-    return res.json({ jwtToken });
+    return res.json({ username:user.rows[0].user_name, email:user.rows[0].user_email, jwtToken });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

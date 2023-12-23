@@ -47,7 +47,7 @@
     padding-top: 10px;
 }
 
-.sidebar-toggle-btn {
+.sidebar-toggle-btn, .sidebar-link {
     margin:0;
     outline: none;
     padding:0;
@@ -61,7 +61,7 @@
     background-color: transparent;
 }
 
-.sidebar-toggle-btn:hover {
+.sidebar-toggle-btn:hover, .sidebar-link:hover {
     filter: invert(15%) sepia(62%) saturate(4844%) hue-rotate(200deg) brightness(93%) contrast(104%);;
 }
 

@@ -21,7 +21,15 @@ i18n
           allDayShade:"À l'ombre toute la journée",
           amSun:"Soleil en matinée",
           pmSun:"Soleil en après-midi",
-          restrictions:'Accès et restrictions'
+          restrictions:'Accès et restrictions',
+          username: "Nom d'utilisateur",
+          required:'Ce champ est requis',
+          maxlength:'Limite de caractères atteinte',
+          minlength2:'2 caractères requis minimalement',
+          minlength8:'8 caractères requis minimalement',
+          email:'Courriel',
+          emailpattern:"Adresse courriel invalide",
+          password:'Mot de passe'
           }
         },
       en: {
@@ -33,7 +41,15 @@ i18n
           allDayShade:"All day shade",
           amSun:"AM sun",
           pmSun:"PM sun",
-          restrictions:'Access and restrictions'
+          restrictions:'Access and restrictions',
+          username: "Username",
+          required:'This field is required',
+          maxlength:'Too many characters',
+          minlength2:'2 characters minimally required',
+          minlength8:'8 characters minimally required',
+          email:'Email',
+          emailpattern:"Invalid email address",
+          password:'Password'
         }
       }
     }

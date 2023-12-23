@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import ToggleLanguage from "./togglelanguage/ToggleLanguage";
 import Destination from "./destination/Destination";
@@ -6,8 +7,10 @@ import Data from './data/Data';
 import menuIcon from '../../assets/menu-icon.svg';
 import menuCloseIcon from '../../assets/menu-close-icon.svg';
 import logoIcon from '../../assets/logo-icon.png';
+import logoutIcon from '../../assets/logout-icon.svg';
+import loginIcon from '../../assets/login-icon.svg';
 
-function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestination, displayDestinationInfo, handleDisplayDestinationInfo, handleFocus}) {
+function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestination, displayDestinationInfo, handleDisplayDestinationInfo, handleFocus, user, logout}) {
     return (
         <aside className="sidebar-main-box" style={{width:showSidebar?'300px':'50px', paddingLeft:showSidebar?'7px':'0px'}}>
             <div className="sidebar-row-box" style={{paddingLeft:showSidebar?'0px':'7px'}}>
@@ -25,6 +28,8 @@ function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestinatio
             {showSidebar && displayDestinationInfo && focusedDestination && <Destination focusedDestination={focusedDestination} handleDisplayDestinationInfo={handleDisplayDestinationInfo}/>}
             {showSidebar && !displayDestinationInfo && <Data data={data} areas={areas} handleFocus={handleFocus}/>}
             <div style={{flex:1}}/>
+            {!user && <Link className='sidebar-link' to='/login' style={{width:showSidebar?'fit-content':'100%', alignSelf:showSidebar?'flex-end':null, paddingRight:showSidebar?'7px':'0px'}}><img src={loginIcon} className='sidebar-toggle-btn-img'/></Link>}
+            {user && <button type='button' className='sidebar-toggle-btn' onClick={logout} style={{width:showSidebar?'fit-content':'100%'}}><img src={logoutIcon} className='sidebar-toggle-btn-img' alt='logout'/></button>}
             <ToggleLanguage showSidebar={showSidebar}/>
         </aside>
     )

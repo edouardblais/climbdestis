@@ -2,8 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   QueryClient,
   QueryClientProvider,
-} from 'react-query'
-import Map from './components/map/Map'
+} from 'react-query';
+import Map from './components/map/Map';
+import Login from './components/login/Login.jsx';
+import Register from './components/login/Register.jsx';
 import './App.css';
 
 const queryClient = new QueryClient()
@@ -15,8 +17,8 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Map/>} />
-              <Route path="/area/:area" element={<Map/>} />
-              <Route path="/destination/:destination_id" element={<Map/>} />
+            <Route path="/login" element={<Login/>}/>
+            <Route path='/register' element={<Register/>}/>
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
