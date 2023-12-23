@@ -9,7 +9,7 @@
     background: linear-gradient(90deg, #004EA4 2%, #D9E4F1 50%, #004EA4 98%);
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
     padding:7px 2px 0 7px;
-    z-index:5;
+    z-index:10;
     position:absolute;
     top: 15px;
     left:70px;
@@ -21,7 +21,7 @@
     margin:0;
     padding:0;
     border:none;
-    z-index: 2;
+    z-index: 10;
     cursor: pointer;
 }
 
@@ -34,7 +34,7 @@
     position:absolute;
     top: 15px;
     left:70px;
-    z-index:5;
+    z-index:10;
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
     border-radius: 5px;
     background: linear-gradient(90deg, #D9E4F1 0%, #C0D3E8 0.01%, #004EA4 65.58%);

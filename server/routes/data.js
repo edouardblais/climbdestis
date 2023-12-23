@@ -1,24 +1,17 @@
-const pool = require("./db")
+const pool = require("../db");
+const express = require("express");
+const router = express.Router();
 
-const getMapboxKey = async (req, res) => {
-    try {
-        const mapboxKey = await pool.query("SELECT * FROM apikeys WHERE api = 'mapbox'");
-        res.json(mapboxKey.rows);
-    } catch (err) {
-        console.error(err.message);
-    }
-};
-
-const getAll = async (req, res) => {
+router.get("/getAll", async (req, res) => {
     try {
         const allDestinations = await pool.query("SELECT * from destis");
         res.json(allDestinations.rows)
     } catch (err) {
         console.error(err.message)
     }
-}
+});
 
-const getByArea = async (req, res) => {
+router.get("/getByArea", async (req, res) => {
     try {
         const {area} =  req.params
         const destinationsByArea = await pool.query("SELECT * from destis WHERE area = $1", [area]);
@@ -26,9 +19,9 @@ const getByArea = async (req, res) => {
     } catch (err) {
         console.error(err.message)
     }
-}
+});
 
-const getByDestination = async (req, res) => {
+router.get("/getByDestination", async (req, res) => {
     try {
         const {destination_id} =  req.params
         const destination = await pool.query("SELECT * from destis WHERE destination = $1", [destination_id]);
@@ -36,6 +29,6 @@ const getByDestination = async (req, res) => {
     } catch (err) {
         console.error(err.message)
     }
-}
+});
 
-module.exports = { getMapboxKey, getAll, getByArea, getByDestination };
+module.exports = router;

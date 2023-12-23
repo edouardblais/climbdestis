@@ -10,7 +10,7 @@
     position:absolute;
     top: 90px;
     left:76px;
-    z-index:2;
+    z-index:10;
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
     border-radius: 5px;
     transition: left 0.4s ease;
