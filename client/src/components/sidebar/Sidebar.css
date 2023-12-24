@@ -62,7 +62,7 @@
 }
 
 .sidebar-toggle-btn:hover, .sidebar-link:hover {
-    filter: invert(15%) sepia(62%) saturate(4844%) hue-rotate(200deg) brightness(93%) contrast(104%);;
+    filter: invert(15%) sepia(62%) saturate(4844%) hue-rotate(200deg) brightness(93%) contrast(104%);
 }
 
 .sidebar-toggle-btn-img {

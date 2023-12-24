@@ -29,7 +29,10 @@ i18n
           minlength8:'8 caractères requis minimalement',
           email:'Courriel',
           emailpattern:"Adresse courriel invalide",
-          password:'Mot de passe'
+          password:'Mot de passe',
+          login:'Connexion',
+          register:"S'inscrire",
+          submit:'Envoyer'
           }
         },
       en: {
@@ -49,7 +52,10 @@ i18n
           minlength8:'8 characters minimally required',
           email:'Email',
           emailpattern:"Invalid email address",
-          password:'Password'
+          password:'Password',
+          login:'Sign in',
+          register:'Register',
+          submit:'Submit'
         }
       }
     }

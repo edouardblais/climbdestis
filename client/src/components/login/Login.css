@@ -1,5 +1,132 @@
-.login-form {
+.login-main-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.login-title-box {
+    position: absolute;
+    top:20px;
+    left: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    align-items: center;
+}
+
+.login-logo {
+    height: 60px;
+    width: auto;
+}
+
+.login-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.login-form, .login-form-box {
     display: flex;
     flex-direction: column;
+}
+
+.login-form-box {
+    gap:20px;
+    box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.40);
+    padding: 20px;
+    width: 500px;
+    border-radius: 10px;
+}
+
+.login-form {
     gap:10px;
+}
+
+.login-sub-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.login-label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin:0;
+}
+
+.login-input {
+    padding: 5px 10px;
+    border:none;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.36);
+    border-radius: 5px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color:#000000;
+}
+
+.login-input:focus {
+    outline: 2px solid #004EA4;
+}
+
+.login-error {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: rgba(233, 0, 0, 1);
+    margin:0;
+}
+
+.login-submit {
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.50));
+    background: linear-gradient(90deg, #D9E4F1 -80%, #C0D3E8 -58.49%, #004EA4 80%);
+    border-radius: 5px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    padding: 10px 16px;
+    border:none;
+    align-self: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-submit:hover {
+    background: #000000;
+}
+
+.login-link {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #004EA4;
+    margin:0;
+    text-decoration: none;
+}
+
+.login-link:hover{
+    color:#000000;
+}
+
+.login-link-alt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    top:20px;
+    right: 80px;
+    z-index: 2;
+}
+
+.login-link-img {
+    height: 30px;
+    width: auto;
+}
+
+.login-link-img:hover {
+    filter: invert(15%) sepia(62%) saturate(4844%) hue-rotate(200deg) brightness(93%) contrast(104%);
 }

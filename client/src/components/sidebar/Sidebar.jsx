@@ -30,7 +30,7 @@ function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestinatio
             <div style={{flex:1}}/>
             {!user && <Link className='sidebar-link' to='/login' style={{width:showSidebar?'fit-content':'100%', alignSelf:showSidebar?'flex-end':null, paddingRight:showSidebar?'7px':'0px'}}><img src={loginIcon} className='sidebar-toggle-btn-img'/></Link>}
             {user && <button type='button' className='sidebar-toggle-btn' onClick={logout} style={{width:showSidebar?'fit-content':'100%'}}><img src={logoutIcon} className='sidebar-toggle-btn-img' alt='logout'/></button>}
-            <ToggleLanguage showSidebar={showSidebar}/>
+            <ToggleLanguage justify={showSidebar?'flex-end':'center'} classname={'translate-btn-box'}/>
         </aside>
     )
 }
