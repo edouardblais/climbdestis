@@ -6,10 +6,12 @@ import ToggleLanguage from "../sidebar/togglelanguage/ToggleLanguage";
 import './Login.css';
 import logoIcon from '../../assets/logo-icon.png';
 import mapIcon from '../../assets/map-icon.svg';
+import { useState } from "react";
 
 function Login() {
     const navigate = useNavigate();
     const [t,] = useTranslation();
+    const [loginError, setLoginError] = useState(null)
 
     const {
         register,
@@ -27,7 +29,11 @@ function Login() {
         })
         .then(response => {
             if (!response.ok) {
-                console.log(response)
+                if (response.status === 401) {
+                    setLoginError(401)
+                } else {
+                    setLoginError(500)
+                }
                 throw new Error('Network response was not ok');
             }
             return response.json();
@@ -36,13 +42,13 @@ function Login() {
             localStorage.setItem('user', JSON.stringify(data));
             navigate('/')
         })
-        .catch(error => {
-            console.error('There was an error logging in:', error);
+        .catch(() => {
             throw new Error('Login failed');
         });
     });
 
     const onSubmit= (data) => {
+        setLoginError(null)
         mutation.mutate(data)
     }
 
@@ -100,6 +106,9 @@ function Login() {
                     )}
                     <button type="submit" className="login-submit">{t('submit')}</button>
                 </form>
+                {loginError && (
+                    <span role="alert" className="login-error">{loginError===401?t('error401'):t('error500')}</span>
+                )}
                 <Link to='/register' className="login-link">{t('register')}</Link>
             </div>
         </main>

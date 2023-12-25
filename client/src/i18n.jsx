@@ -32,7 +32,10 @@ i18n
           password:'Mot de passe',
           login:'Connexion',
           register:"S'inscrire",
-          submit:'Envoyer'
+          submit:'Envoyer',
+          error401:"Erreur d'authentification. Veuillez vérifier le courriel et mot de passe entrés.",
+          error401alt:"Cette adresse courriel est déjà associée à un utilisateur.",
+          error500:"Erreur de serveur. Veuillez réessayer."
           }
         },
       en: {
@@ -55,7 +58,10 @@ i18n
           password:'Password',
           login:'Sign in',
           register:'Register',
-          submit:'Submit'
+          submit:'Submit',
+          error401:"Authentication error. Please verify the email and password entered.",
+          error401alt:"This email address is already associated to a user.",
+          error500:"Server error. Please try again."
         }
       }
     }

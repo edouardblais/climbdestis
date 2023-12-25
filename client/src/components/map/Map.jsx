@@ -39,7 +39,6 @@ function Map() {
         if (userData) {
             const parsedUserData = JSON.parse(userData);
             setUser(parsedUserData)
-            console.log(parsedUserData)
         }
     }, [])
 

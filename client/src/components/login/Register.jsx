@@ -5,10 +5,12 @@ import { useNavigate, Link } from "react-router-dom";
 import logoIcon from '../../assets/logo-icon.png';
 import mapIcon from '../../assets/map-icon.svg';
 import ToggleLanguage from '../sidebar/togglelanguage/ToggleLanguage';
+import { useState } from "react";
 
 function Register() {
     const navigate = useNavigate();
     const [t,] = useTranslation();
+    const [registerError, setRegisterError] = useState(null)
 
     const {
         register,
@@ -26,23 +28,26 @@ function Register() {
         })
         .then(response => {
             if (!response.ok) {
-                console.log(response)
+                if (response.status === 401) {
+                    setRegisterError(401)
+                } else {
+                    setRegisterError(500)
+                }
                 throw new Error('Network response was not ok');
             }
             return response.json();
         })
         .then(data => {
-            console.log(data)
             localStorage.setItem('user', JSON.stringify(data));
             navigate('/login')
         })
-        .catch(error => {
-            console.error('There was an error logging in:', error);
+        .catch(() => {
             throw new Error('Login failed');
         });
     });
 
     const onSubmit= (data) => {
+        setRegisterError(null)
         mutation.mutate(data)
     }
 
@@ -117,6 +122,9 @@ function Register() {
                 )}
                 <button type="submit" className="login-submit">{t('submit')}</button>
             </form>
+            {registerError && (
+                <span role="alert" className="login-error">{registerError===401?t('error401alt'):t('error500')}</span>
+            )}
             <Link to='/login' className="login-link">{t('login')}</Link>
             </div>
         </main>
