@@ -31,11 +31,15 @@ i18n
           emailpattern:"Adresse courriel invalide",
           password:'Mot de passe',
           login:'Connexion',
+          logout:'Se déconnecter',
           register:"S'inscrire",
           submit:'Envoyer',
           error401:"Erreur d'authentification. Veuillez vérifier le courriel et mot de passe entrés.",
           error401alt:"Cette adresse courriel est déjà associée à un utilisateur.",
-          error500:"Erreur de serveur. Veuillez réessayer."
+          error500:"Erreur de serveur. Veuillez réessayer.",
+          favorites:'Favoris',
+          pleaseLogin:'Veuillez vous connecter pour voir vos favoris!',
+          noFavorites: "Aucune destination n'a encore été ajoutée à vo favoris!"
           }
         },
       en: {
@@ -57,11 +61,15 @@ i18n
           emailpattern:"Invalid email address",
           password:'Password',
           login:'Sign in',
+          logout:'Sign out',
           register:'Register',
           submit:'Submit',
           error401:"Authentication error. Please verify the email and password entered.",
           error401alt:"This email address is already associated to a user.",
-          error500:"Server error. Please try again."
+          error500:"Server error. Please try again.",
+          favorites:'Favorites',
+          pleaseLogin:'Please login to see your favorites!',
+          noFavorites: "No destination has been added to your favorites yet!"
         }
       }
     }

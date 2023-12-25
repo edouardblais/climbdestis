@@ -10,6 +10,9 @@
     background-color: #fff;
     gap:15px;
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
+}
+
+.transition-width {
     transition: width 0.4s ease;
 }
 
@@ -59,6 +62,9 @@
     align-items: center;
     height: fit-content;
     background-color: transparent;
+    text-decoration: none;
+    color:#000000;
+    gap:2px;
 }
 
 .sidebar-toggle-btn:hover, .sidebar-link:hover {
@@ -110,4 +116,9 @@
 
 .border-bottom {
     border-bottom: 2px solid #c5c5c5;
+}
+
+.sidebar-text {
+    font-size: 1.5rem;
+    font-weight: 600;
 }
