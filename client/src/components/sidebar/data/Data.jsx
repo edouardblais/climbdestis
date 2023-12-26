@@ -23,10 +23,10 @@ function Data({data, areas, handleFocus}) {
                 return (
                     <div className='sidebar-category-box' key={area}>
                         <div className='sidebar-category-title-box'>
+                            <h2 className='sidebar-category'>{area}</h2>
                             <button type='button' onClick={() => showArea(area)} className='sidebar-category-display-btn'>
                                 <img src={displayArea.includes(area)?upIcon:downIcon} alt='see or hide category' className='sidebar-category-display-btn-img'/>
                             </button>
-                            <h2 className='sidebar-category'>{area}</h2>
                         </div>
                         <div className='sidebar-category-destination-box'>
                         {data.length>0 && 

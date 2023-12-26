@@ -19,7 +19,7 @@ import fqmeIcon from '../../../assets/fqme-icon.svg';
 function Destination({focusedDestination, handleDisplayDestinationInfo}) {
     const [t,] = useTranslation();
     return (
-        <div className='sidebar-big-column-box'>
+        <div className='sidebar-destination-box'>
                     <div className='sidebar-row-box' style={{paddingBottom:'5px'}}>
                         <button className='sidebar-toggle-btn' type='button' onClick={() => handleDisplayDestinationInfo(false)}>
                             <img alt='back to search results' src={backIcon} className='sidebar-toggle-btn-img-small'/>

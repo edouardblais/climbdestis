@@ -9,6 +9,7 @@ router.get("/getMapboxKey", async (req, res) => {
         res.json(mapboxKey.rows);
     } catch (err) {
         console.error(err.message);
+        res.status(500).send("Server error");
     }
 });
 

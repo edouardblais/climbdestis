@@ -7,7 +7,7 @@ import downIcon from '../../../assets/down-icon.svg';
 import upIcon from '../../../assets/up-icon.svg';
 import infoIcon from '../../../assets/info-icon.svg';
 
-function Favorites({user}) {
+function Favorites({user, favorites, handleFocus}) {
     const [t,] = useTranslation();
     const [displayFavorites, setDisplayFavorites] = useState(false);
     const [displayLoginMessage, setDisplayLoginMessage] = useState(false);
@@ -31,12 +31,14 @@ function Favorites({user}) {
             {displayLoginMessage && 
             <span className="favorites-message">{t('pleaseLogin')}</span>
             }
-            {user && user?.favorites?.lenght>0 &&
+            {user && favorites?.length>0 && displayFavorites &&
             <div className="favorites-column-box">
-
+                {favorites.map((fav_desti) => {
+                    return <button className='favorites-btn' onClick={() => handleFocus(fav_desti)} key={fav_desti.id}>{fav_desti.destination}</button>
+            })}
             </div>
             }
-            {user && user?.favorites?.lenght===0 &&
+            {user && favorites?.length===0 && displayFavorites &&
             <span className="favorites-message">{t('noFavorites')}</span>
             }
         </div>

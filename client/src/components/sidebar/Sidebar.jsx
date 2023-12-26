@@ -12,7 +12,7 @@ import logoIcon from '../../assets/logo-icon.png';
 import logoutIcon from '../../assets/logout-icon.svg';
 import loginIcon from '../../assets/login-icon.svg';
 
-function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestination, displayDestinationInfo, handleDisplayDestinationInfo, handleFocus, user, logout}) {
+function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestination, displayDestinationInfo, handleDisplayDestinationInfo, handleFocus, user, logout, favorites}) {
     const [t,] = useTranslation();
 
     return (
@@ -29,7 +29,7 @@ function Sidebar({showSidebar, handleShowSidebar, data, areas, focusedDestinatio
             <button type='button' className='sidebar-toggle-btn' onClick={handleShowSidebar} style={{width:showSidebar?'fit-content':'100%'}}>
                 <img src={menuIcon} className='sidebar-toggle-btn-img' alt='toggle menu'/>
             </button>}
-            {showSidebar && <Favorites user={user}/>}
+            {showSidebar && <Favorites user={user} favorites={favorites} handleFocus={handleFocus}/>}
             {showSidebar && displayDestinationInfo && focusedDestination && <Destination focusedDestination={focusedDestination} handleDisplayDestinationInfo={handleDisplayDestinationInfo}/>}
             {showSidebar && !displayDestinationInfo && <Data data={data} areas={areas} handleFocus={handleFocus}/>}
             <div style={{flex:1}}/>

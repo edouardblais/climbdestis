@@ -34,3 +34,9 @@ CREATE TABLE users(
   user_password VARCHAR(255) NOT NULL,
   PRIMARY KEY (user_id)
 );
+
+CREATE TABLE user_favorites (
+    id SERIAL PRIMARY KEY,
+    user_id UUID REFERENCES users(user_id),
+    destis_id INTEGER REFERENCES destis(id)
+);

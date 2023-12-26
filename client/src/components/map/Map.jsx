@@ -42,6 +42,25 @@ function Map() {
         }
     }, [])
 
+    const favorites = useQuery(
+        ['favorites', user],
+        async () => {
+            if (user && user.id && user.jwtToken) {
+                const response = await fetch(`http://localhost:5000/favorites/getFavorites/${user.id}`, {
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'jwtToken':`${user.jwtToken}`
+                    }
+                })
+                const result = await response.json();
+                return result
+            }
+        },
+        {
+          enabled: !!user, 
+        }
+    );
+
     useEffect(() => {
         if (mapboxData?.data?.length>0) {
             setMapboxKey(mapboxData.data[0]?.apikey)
@@ -180,6 +199,7 @@ function Map() {
                 handleFocus={handleFocus}
                 user={user}
                 logout={logout}
+                favorites={favorites?.data}
             />
             <Geolocator 
                 showSidebar={showSidebar}
