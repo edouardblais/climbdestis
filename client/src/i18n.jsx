@@ -39,7 +39,8 @@ i18n
           error500:"Erreur de serveur. Veuillez réessayer.",
           favorites:'Favoris',
           pleaseLogin:'Veuillez vous connecter pour voir vos favoris!',
-          noFavorites: "Aucune destination n'a encore été ajoutée à vo favoris!"
+          noFavorites: "Aucune destination n'a encore été ajoutée à vo favoris!",
+          climbingdestis:"Destinations d'escalade"
           }
         },
       en: {
@@ -69,7 +70,8 @@ i18n
           error500:"Server error. Please try again.",
           favorites:'Favorites',
           pleaseLogin:'Please login to see your favorites!',
-          noFavorites: "No destination has been added to your favorites yet!"
+          noFavorites: "No destination has been added to your favorites yet!",
+          climbingdestis:'Climbing destinations'
         }
       }
     }

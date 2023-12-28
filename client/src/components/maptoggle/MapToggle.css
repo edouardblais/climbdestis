@@ -11,8 +11,8 @@
     padding:7px 2px 0 7px;
     z-index:10;
     position:absolute;
-    top: 15px;
-    left:70px;
+    bottom:10px;
+    right:10px;
     transition: left 0.4s ease;
 }
 
@@ -32,8 +32,8 @@
 
 .maptoggle-options-btn {
     position:absolute;
-    top: 15px;
-    left:70px;
+    bottom: 10px;
+    right:10px;
     z-index:10;
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
     border-radius: 5px;

@@ -5,7 +5,7 @@
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.36);
     border-radius: 5px;
     margin:5px 8px 5px 2px;
-    padding: 5px 8px 5px 6px;
+    padding: 8px 10px 8px 8px;
 }
 
 .sidebar-destination-name {
@@ -16,6 +16,10 @@
 .sidebar-destination-area {
     font-size: 1.1rem;
     font-weight: 400;
+    word-wrap: nowrap;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
 }
 
 .sidebar-destination-text {
@@ -33,4 +37,8 @@
     font-size: 1.3rem;
     font-weight: 700;
     color:#004EA4;
+    word-wrap: nowrap;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
 }

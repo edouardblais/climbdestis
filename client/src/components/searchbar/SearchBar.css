@@ -1,7 +1,7 @@
 .search-bar-super-box {
     position: absolute;
-    top:30px;
-    right:30px;
+    top:10px;
+    right:10px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -15,7 +15,7 @@
     flex-direction: row;
     align-items: center;
     padding:5px 5px 5px 10px;
-    width:300px
+    width:270px
 }
 
 .search-bar-input {

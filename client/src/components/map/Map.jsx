@@ -35,7 +35,7 @@ function Map() {
     );
 
     useEffect(() => {
-        const userData = localStorage.getItem('user');
+        const userData = sessionStorage.getItem('user');
         if (userData) {
             const parsedUserData = JSON.parse(userData);
             setUser(parsedUserData)
@@ -183,7 +183,6 @@ function Map() {
                 handleFocus={handleFocus}
             />
             <MapToggle 
-                showSidebar={showSidebar}
                 displayMapOptions={displayMapOptions} 
                 handleMap={handleMap} 
                 handleDisplayOptions={() => setDisplayMapOptions(true)}
@@ -202,7 +201,6 @@ function Map() {
                 favorites={favorites?.data}
             />
             <Geolocator 
-                showSidebar={showSidebar}
                 map={map}
             />
         </main>

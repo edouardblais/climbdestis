@@ -2,7 +2,7 @@
 import geolocatorIcon from '../../assets/geolocator-icon.svg';
 import './Geolocator.css'
 
-function Geolocator({showSidebar, map}) {
+function Geolocator({map}) {
 
     const geolocateUser = () => {
         if ('geolocation' in navigator) {
@@ -20,7 +20,7 @@ function Geolocator({showSidebar, map}) {
     }
 
     return (
-        <button onClick={geolocateUser} className="geolocator-btn" type='button' style={{left:showSidebar?'326px':'76px'}}>
+        <button onClick={geolocateUser} className="geolocator-btn" type='button'>
             <img src={geolocatorIcon} className="geolocator-btn-img" alt='geolocate user icon'/>
         </button>
     )

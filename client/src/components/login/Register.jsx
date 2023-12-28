@@ -37,12 +37,11 @@ function Register() {
             }
             return response.json();
         })
-        .then(data => {
-            localStorage.setItem('user', JSON.stringify(data));
+        .then(() => {
             navigate('/login')
         })
         .catch(() => {
-            throw new Error('Login failed');
+            throw new Error('Register failed');
         });
     });
 

@@ -8,8 +8,8 @@
     cursor: pointer;
     background: linear-gradient(90deg, #D9E4F1 0%, #C0D3E8 0.01%, #004EA4 65.58%);
     position:absolute;
-    top: 90px;
-    left:76px;
+    bottom: 85px;
+    right:15px;
     z-index:10;
     box-shadow: 3px 4px 11px 0px rgba(0, 0, 0, 0.20);
     border-radius: 5px;

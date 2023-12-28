@@ -39,7 +39,7 @@ function Login() {
             return response.json();
         })
         .then(data => {
-            localStorage.setItem('user', JSON.stringify(data));
+            sessionStorage.setItem('user', JSON.stringify(data));
             navigate('/')
         })
         .catch(() => {
