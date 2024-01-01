@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import { RotatingLines } from "react-loader-spinner";
 import './LoadingSpinner.css';
 
-function LoadingSpinner() {
+const LoadingSpinner:FC = () => {
     return (
         <div className="loading-spinner-box">
             <RotatingLines

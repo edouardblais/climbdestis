@@ -1,8 +1,14 @@
 /* eslint-disable react/prop-types */
+import { FC } from 'react';
 import {useTranslation} from "react-i18next";
 import './ToggleLanguage.css';
 
-function ToggleLanguage({justify, classname}) {
+interface ToggleLanguageProps {
+    justify: string;
+    classname: string;
+}
+
+const ToggleLanguage:FC<ToggleLanguageProps> = ({justify, classname}) => {
     const [,i18n] = useTranslation();
 
     const changeLanguage = () => {

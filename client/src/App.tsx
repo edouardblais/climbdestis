@@ -3,8 +3,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
-import Map from './components/map/Map';
-import Login from './components/login/Login.jsx';
+import Map from './components/map/Map.jsx';
+import Login from './components/login/Login.tsx';
 import Register from './components/login/Register.jsx';
 import './App.css';
 

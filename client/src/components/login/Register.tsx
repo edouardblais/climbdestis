@@ -1,4 +1,5 @@
-import { useForm } from "react-hook-form";
+import { FC } from 'react';
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import { useMutation } from 'react-query';
 import { useNavigate, Link } from "react-router-dom";
@@ -7,10 +8,10 @@ import mapIcon from '../../assets/map-icon.svg';
 import ToggleLanguage from '../sidebar/togglelanguage/ToggleLanguage';
 import { useState } from "react";
 
-function Register() {
+const Register:FC = () => {
     const navigate = useNavigate();
     const [t,] = useTranslation();
-    const [registerError, setRegisterError] = useState(null)
+    const [registerError, setRegisterError] = useState<number | null>(null)
 
     const {
         register,
@@ -18,8 +19,8 @@ function Register() {
         formState: { errors },
     } = useForm();
 
-    const mutation = useMutation((data) => {
-        fetch('http://localhost:5000/auth/register', {
+    const mutation = useMutation({mutationFn:(data:FieldValues) => {
+        return fetch('http://localhost:5000/auth/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -43,11 +44,11 @@ function Register() {
         .catch(() => {
             throw new Error('Register failed');
         });
-    });
+    }});
 
-    const onSubmit= (data) => {
+    const onSubmit: SubmitHandler<FieldValues> = (formData: FieldValues) => {
         setRegisterError(null)
-        mutation.mutate(data)
+        mutation.mutate(formData)
     }
 
     return (
@@ -56,7 +57,7 @@ function Register() {
             <img className="login-logo" src={logoIcon}/>
             <h1 className="login-title">Homecrag</h1>
         </div>
-        <ToggleLanguage justify={null} classname={'translate-btn-box-alt'}/>
+        <ToggleLanguage justify={'start'} classname={'translate-btn-box-alt'}/>
         <Link className="login-link-alt" to='/'><img src={mapIcon} alt='back to map' className="login-link-img"/></Link>
         <div className="login-form-box">
             <h2 className="login-sub-title">{t('register')}</h2>
@@ -88,6 +89,7 @@ function Register() {
                             required: true, 
                             maxLength: 255, 
                             pattern: {
+                                message: t('emailpattern'),
                                 value:
                                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                             }

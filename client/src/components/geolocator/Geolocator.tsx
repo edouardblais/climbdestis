@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
+import { FC, RefObject } from 'react';
 import geolocatorIcon from '../../assets/geolocator-icon.svg';
-import './Geolocator.css'
+import './Geolocator.css';
 
-function Geolocator({map}) {
+const Geolocator:FC<RefObject<HTMLDivElement>> = ({map}) => {
 
-    const geolocateUser = () => {
-        if ('geolocation' in navigator) {
+    const geolocateUser = ():void => {
+        if ('geolocation' in navigator && map) {
             navigator.geolocation.getCurrentPosition(
               (position) => {
                 const { latitude, longitude } = position.coords;

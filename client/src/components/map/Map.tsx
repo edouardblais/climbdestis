@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, RefObject, FC } from 'react';
 import { useQuery } from 'react-query'
 import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer';
-import maplibregl from 'maplibre-gl';
+import maplibregl, { LngLatLike } from 'maplibre-gl';
 import Sidebar from '../sidebar/Sidebar';
 import MapToggle from '../maptoggle/MapToggle';
 import SearchBar from '../searchbar/SearchBar';
@@ -9,10 +9,10 @@ import Geolocator from '../geolocator/Geolocator';
 import LoadingSpinner from '../loadingspinner/LoadingSpinner';
 import './Map.css';
 
-function Map() {
+const Map:FC = () => {
     const [mapboxKey, setMapboxKey] = useState('')
     const [zoom, setZoom] = useState(8);
-    const [center, setCenter] = useState([-73.561668, 45.508888]);
+    const [center, setCenter] = useState<LngLatLike>([-73.561668, 45.508888]);
     const [mapDisplayed, setMapDisplayed] = useState('mapbox://styles/mapbox/light-v11');
     const [changingMap, setChangingMap] = useState(false);
     const [displayMapOptions, setDisplayMapOptions] = useState(false);
@@ -23,8 +23,8 @@ function Map() {
     const [areas, setAreas] = useState([]);
     const [mapLoading, setMapLoading] = useState(true);
     const [user, setUser] = useState(null);
-    const map = useRef();
-    const mapContainer = useRef();
+    const map = useRef<maplibregl.Map | null>(null);
+    const mapContainer = useRef<RefObject<HTMLElement> | null>(null);
 
     const mapboxData = useQuery('mapboxkey', () => 
         fetch('http://localhost:5000/apiKeys/getMapboxKey').then(res => res.json())
@@ -77,7 +77,7 @@ function Map() {
             }
             setMapLoading(true)
             map.current = new maplibregl.Map({
-                container: mapContainer.current,
+                container: mapContainer.current || '',
                 style:mapDisplayed,
                 center: center ?? [-73.561668, 45.508888],
                 zoom: zoom ?? 8,
@@ -130,7 +130,7 @@ function Map() {
     }
 
     const handleMap = (newMap) => {
-        if (mapDisplayed !== newMap) {
+        if (mapDisplayed !== newMap && map.current) {
             setZoom(map.current.getZoom())
             setCenter([map.current.getCenter().lng, map.current.getCenter().lat])
             setChangingMap(true)
@@ -141,7 +141,7 @@ function Map() {
     }
 
     const handleFocus = (destination) => {
-        if (destination?.longitude && destination?.latitude) {
+        if (destination?.longitude && destination?.latitude && map.current) {
             map.current.flyTo({
                 center:[destination.longitude, destination.latitude],
                 essential:true,
@@ -153,7 +153,7 @@ function Map() {
         setShowSidebar(true)
     }
 
-    const handleDisplayDestinationInfo = (boolean) => {
+    const handleDisplayDestinationInfo = (boolean:boolean) => {
         if (boolean) {
             setDisplayDestinationInfo(true)
         } else if (!boolean) {

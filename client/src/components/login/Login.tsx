@@ -1,4 +1,5 @@
-import { useForm } from "react-hook-form";
+import { FC } from 'react';
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import { useMutation } from 'react-query';
 import { useNavigate, Link } from "react-router-dom";
@@ -8,10 +9,10 @@ import logoIcon from '../../assets/logo-icon.png';
 import mapIcon from '../../assets/map-icon.svg';
 import { useState } from "react";
 
-function Login() {
+const Login:FC = () => {
     const navigate = useNavigate();
     const [t,] = useTranslation();
-    const [loginError, setLoginError] = useState(null)
+    const [loginError, setLoginError] = useState<number | null>(null)
 
     const {
         register,
@@ -19,8 +20,8 @@ function Login() {
         formState: { errors },
     } = useForm();
 
-    const mutation = useMutation((data) => {
-        fetch('http://localhost:5000/auth/login', {
+    const mutation = useMutation({mutationFn:(data:FieldValues) => {
+        return fetch('http://localhost:5000/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -45,12 +46,12 @@ function Login() {
         .catch(() => {
             throw new Error('Login failed');
         });
-    });
+    }});
 
-    const onSubmit= (data) => {
-        setLoginError(null)
-        mutation.mutate(data)
-    }
+    const onSubmit: SubmitHandler<FieldValues> = (formData: FieldValues) => {
+        setLoginError(null);
+        mutation.mutate(formData);
+      };
 
     return (
         <main className="login-main-box">
@@ -59,7 +60,7 @@ function Login() {
                 <h1 className="login-title">Homecrag</h1>
             </div>
             <Link className="login-link-alt" to='/'><img src={mapIcon} alt='back to map' className="login-link-img"/></Link>
-            <ToggleLanguage justify={null} classname={'translate-btn-box-alt'}/>
+            <ToggleLanguage justify={'start'} classname={'translate-btn-box-alt'}/>
             <div className="login-form-box">
                 <h2 className="login-sub-title">{t('login')}</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="login-form">
@@ -73,6 +74,7 @@ function Login() {
                                 required: true, 
                                 maxLength: 255, 
                                 pattern: {
+                                    message: t('emailpattern'),
                                     value:
                                     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                                 }
